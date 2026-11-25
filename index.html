@@ -435,7 +435,8 @@ dialog.wide{width:min(1060px,95vw)}
 .sbw{display:flex;align-items:center;gap:10px}#subbar{flex:1;min-width:0}
 .sbw .index-btn{margin-left:0;flex-shrink:0}
 .sbw{position:relative}
-.subindex-wrap{position:relative;flex-shrink:0}
+.tab[aria-haspopup="true"]::after{content:'▾';font-size:9px;margin-left:4px;color:var(--muted);vertical-align:2px}
+.tab[aria-expanded="true"]::after{color:var(--accent)}
 .subindex{position:fixed;right:auto;top:0;z-index:100;width:min(320px,calc(100vw - 32px));background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);box-shadow:0 12px 28px rgba(31,42,48,.16);padding:8px}
 .subindex .dh{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;padding:4px 8px 7px}
 .subindex button{display:grid;grid-template-columns:24px 1fr;gap:8px;width:100%;text-align:left;border:0;background:none;padding:7px 8px;font-size:13.5px;color:var(--ink)}
@@ -562,6 +563,7 @@ tr.best th,tr.best td{background:var(--pale)}
 .pm-rag.a{background:var(--amber-pale);color:var(--amber)}
 .pm-rag.p{background:var(--pale);color:var(--accent)}
 .pm-table td:first-child{min-width:190px}.pm-table td:nth-child(2){min-width:150px}.pm-table td:nth-child(5){min-width:150px}.pm-table td:last-child{min-width:170px}
+.pm-outline td:first-child{width:18%;white-space:nowrap}.pm-outline th,.pm-outline td{padding:6px 10px}
 .pm-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
 .pm-rule{background:var(--soft);border-left:3px solid var(--accent);padding:10px 12px;font-size:13px}
 .pm-rule b{display:block;font-size:13.5px;color:var(--accent);margin-bottom:2px}
@@ -612,7 +614,7 @@ tr.best th,tr.best td{background:var(--pale)}
  <button class="tab" role="tab" id="t-team" aria-controls="team" aria-selected="false" tabindex="-1"><b class="gn">6</b>Team</button>
  <button class="tab" role="tab" id="t-projects" aria-controls="projects" aria-selected="false" tabindex="-1">Projects</button>
  <button class="tab" role="tab" id="t-lab" aria-controls="lab" aria-selected="false" tabindex="-1">AI lab</button>
-</div><div class="subbar"><div class="wrap sbw"><div id="subbar"></div><div class="subindex-wrap"><button class="index-btn" id="subindex-btn" aria-haspopup="true" aria-expanded="false" aria-controls="subindex">Sub-index ▾</button><div class="subindex" id="subindex" role="menu" aria-label="Sub-index" hidden></div></div><button class="index-btn" id="index-btn" aria-haspopup="dialog">☰ Full index</button></div></div></nav>
+</div><div class="subbar"><div class="wrap sbw"><div id="subbar"></div><button class="index-btn" id="index-btn" aria-haspopup="dialog">☰ Full index</button><div class="subindex" id="subindex" role="menu" aria-label="Sub-index" hidden></div></div></div></nav>
 
 <main class="wrap">
 
@@ -969,7 +971,21 @@ tr.best th,tr.best td{background:var(--pale)}
  </div>
 
  <div class="card" id="pm-portfolio">
-  <h3>Portfolio at a glance</h3>
+  <h3>Program management outline</h3>
+  <p class="sub">The program is the operating system around the five projects. It sets the mandate, the decision rhythm, the tranches, the dependencies and the capacity limit.</p>
+  <div class="scroll"><table class="tbl pm-outline">
+   <tbody>
+    <tr><td><b>Mandate</b></td><td>One advancement services operating system across gifts, close, CRM, data, reporting and the team.</td></tr>
+    <tr><td><b>Governance</b></td><td>SAVP chairs. Director leads the program. Monthly portfolio review. Gate decisions include IT and Finance.</td></tr>
+    <tr><td><b>Workstreams</b></td><td>Five projects, each with one owner, one next gate and one benefit.</td></tr>
+    <tr><td><b>Tranches</b></td><td>Protect year-end through December. Stabilize data and reporting January to March. Modernize and pilot April to June. Prove benefits July to December.</td></tr>
+    <tr><td><b>Dependencies</b></td><td>Year-end freeze gates every project. Workday mapping feeds reporting and data quality. Blackbaud releases freeze December 15 to January 15.</td></tr>
+    <tr><td><b>Capacity</b></td><td>Three-person operations team plus temporary peak help. WIP limit is five. Close and peak outrank project dates.</td></tr>
+    <tr><td><b>Benefits</b></td><td>Five measures, each with a baseline, target, owner and review date.</td></tr>
+    <tr><td><b>Escalation</b></td><td>Director to SAVP. IT and Finance co-sign technical and reconciliation decisions. A failed gate stops or changes the project.</td></tr>
+   </tbody>
+  </table></div>
+  <h3 class="mt">Portfolio at a glance</h3>
   <p class="sub">Status as of November 20, 2026. The year-end peak and close outrank every project date.</p>
   <div class="scroll"><table class="tbl pm-table">
    <thead><tr><th>Project</th><th>Sponsor / lead</th><th>Phase</th><th>Status</th><th>Next gate</th><th>Benefit</th></tr></thead>
@@ -2074,46 +2090,46 @@ function showSub(pid, k, user) {
  if (user) { history.replaceState(null, '', '#' + pid + '/' + k); const ph = panel.querySelector('.ph') || panel.firstElementChild, top = ph.getBoundingClientRect().top + scrollY - stickH() - 8; if (scrollY > top) window.scrollTo({top, behavior:'instant'}); }
 }
 
-/* Sub-index dropdown */
-const subindexBtn = $('#subindex-btn'), subindex = $('#subindex');
+/* Sub-index dropdown from the top tab line */
+const subindex = $('#subindex');
 let subindexTimer;
 const panelName = pid => (GROUPS.find(g => g[0] === pid) || [pid, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio'}[pid] || 'Overview'])[1];
 function closeSubindex() {
  if (!subindex) return;
  clearTimeout(subindexTimer);
  subindex.hidden = true;
- subindexBtn.setAttribute('aria-expanded', 'false');
+ $$('.tab').forEach(t => t.setAttribute('aria-expanded', 'false'));
 }
-function openSubindex() {
- const panel = document.querySelector('.panel.on');
- const pid = panel ? panel.id : 'overview';
+function openSubindex(pid) {
+ const tab = document.querySelector(`.tab[aria-controls="${pid}"]`);
+ if (!tab || !subindex) return;
  const subs = SUBS[pid] || [];
  const active = [...document.querySelectorAll(`.subnav[data-panel="${pid}"] button`)].findIndex(b => b.getAttribute('aria-selected') === 'true');
  subindex.innerHTML = `<p class="dh">Sub-index · ${esc(panelName(pid))}</p>` + subs.map((sb, i) => `<button role="menuitem" data-pid="${pid}" data-sub="${i}" aria-current="${i === active}"><b>${String(i + 1).padStart(2, '0')}</b><span>${esc(sb[0])}</span></button>`).join('');
  subindex.hidden = false;
- subindexBtn.setAttribute('aria-expanded', 'true');
- const r = subindexBtn.getBoundingClientRect();
+ $$('.tab').forEach(t => t.setAttribute('aria-expanded', String(t === tab)));
+ const r = tab.getBoundingClientRect();
  const w = Math.min(320, innerWidth - 32);
  subindex.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + 'px';
- subindex.style.top = (r.bottom + 4) + 'px';
+ subindex.style.top = (r.bottom + 6) + 'px';
 }
-if (subindexBtn && subindex) {
- subindexBtn.addEventListener('pointerenter', () => { clearTimeout(subindexTimer); openSubindex(); });
- subindexBtn.addEventListener('pointerleave', () => { subindexTimer = setTimeout(closeSubindex, 180); });
- subindex.addEventListener('pointerenter', () => clearTimeout(subindexTimer));
- subindex.addEventListener('pointerleave', () => { subindexTimer = setTimeout(closeSubindex, 180); });
- subindexBtn.addEventListener('click', e => { e.stopPropagation(); openSubindex(); });
- subindexBtn.addEventListener('focus', openSubindex);
- subindexBtn.addEventListener('focusout', e => { if (!subindex.contains(e.relatedTarget) && e.relatedTarget !== subindexBtn) closeSubindex(); });
- subindex.addEventListener('click', e => {
-  const b = e.target.closest('button[data-pid]'); if (!b) return;
-  show(b.dataset.pid); showSub(b.dataset.pid, +b.dataset.sub, true); closeSubindex();
- });
- document.addEventListener('pointerdown', e => { if (!subindex.contains(e.target) && !subindexBtn.contains(e.target)) closeSubindex(); });
- document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSubindex(); });
- addEventListener('scroll', closeSubindex, {passive: true});
- addEventListener('resize', closeSubindex);
-}
+$$('.tab').forEach(tab => {
+ tab.setAttribute('aria-haspopup', 'true');
+ tab.setAttribute('aria-expanded', 'false');
+ tab.addEventListener('pointerenter', () => { clearTimeout(subindexTimer); openSubindex(tab.getAttribute('aria-controls')); });
+ tab.addEventListener('pointerleave', () => { subindexTimer = setTimeout(closeSubindex, 200); });
+ tab.addEventListener('focus', () => openSubindex(tab.getAttribute('aria-controls')));
+});
+subindex.addEventListener('pointerenter', () => clearTimeout(subindexTimer));
+subindex.addEventListener('pointerleave', () => { subindexTimer = setTimeout(closeSubindex, 200); });
+subindex.addEventListener('click', e => {
+ const b = e.target.closest('button[data-pid]'); if (!b) return;
+ show(b.dataset.pid); showSub(b.dataset.pid, +b.dataset.sub, true); closeSubindex();
+});
+document.addEventListener('pointerdown', e => { if (!subindex.contains(e.target) && !e.target.closest('.tab')) closeSubindex(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSubindex(); });
+addEventListener('scroll', closeSubindex, {passive: true});
+addEventListener('resize', closeSubindex);
 function stickH() { return $('.tabs').offsetHeight; }
 function setStick() { document.documentElement.style.setProperty('--tabs-h', stickH() + 'px'); }
 setStick(); addEventListener('resize', setStick);
