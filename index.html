@@ -603,7 +603,7 @@ tr.best th,tr.best td{background:var(--pale)}
   <p class="eyebrow">Work sample · Director, Advancement Services, Emerson College</p>
   <h1>Advancement Services Operations Hub</h1>
   <p class="for">Every gift from receipt to the general ledger, every system feeding Raiser’s Edge, and every report leadership and fundraisers rely on, with an owner, a target and a check.</p>
-  <span class="asof">Synthetic data · as of November 20, 2026</span>
+  <span class="asof">Synthetic data · as of November 25, 2026</span>
  </div>
  <div class="who"><strong>Narissara Khomkhai</strong><a href="mailto:Narissa.K9@proton.me">Narissa.K9@proton.me</a><br><a href="career-profile.html" class="cp-link" aria-haspopup="dialog">Career profile ↗</a></div>
 </div></header>
@@ -991,7 +991,7 @@ tr.best th,tr.best td{background:var(--pale)}
    </tbody>
   </table></div>
   <h3 class="mt">Portfolio at a glance</h3>
-  <p class="sub">Status as of November 20, 2026. The year-end peak and close outrank every project date.</p>
+  <p class="sub">Status as of November 25, 2026. The year-end peak and close outrank every project date.</p>
   <div class="scroll"><table class="tbl pm-table">
    <thead><tr><th>Project</th><th>Sponsor / lead</th><th>Phase</th><th>Status</th><th>Next gate</th><th>Benefit</th></tr></thead>
    <tbody>
@@ -1117,7 +1117,7 @@ tr.best th,tr.best td{background:var(--pale)}
   <div class="scroll"><table class="tbl">
    <thead><tr><th>Gate</th><th>Date</th><th>Criteria</th><th>Evidence</th><th>Decision</th></tr></thead>
    <tbody>
-    <tr><td><b>G0 · Portfolio approval</b></td><td>Nov 20</td><td>Five projects, owners, benefits and next gates named</td><td>This portfolio</td><td>Approve, defer or stop</td></tr>
+    <tr><td><b>G0 · Portfolio approval</b></td><td>Nov 25</td><td>Five projects, owners, benefits and next gates named</td><td>This portfolio</td><td>Approve, defer or stop</td></tr>
     <tr><td><b>G1 · Year-end readiness</b></td><td>Dec 1</td><td>Temporary help confirmed, receipt stock ready, rota signed</td><td>Readiness checklist</td><td>Go live with the peak plan</td></tr>
     <tr><td><b>G2 · Workday mapping</b></td><td>Dec 18</td><td>Field map, test files and reconciliation approach signed</td><td>Mapping workbook and test log</td><td>Pilot, extend or stop</td></tr>
     <tr><td><b>G3 · Data quality</b></td><td>Jan 15</td><td>95% address validity, duplicate review current</td><td>Record health report</td><td>Close or extend the cleanup</td></tr>
@@ -1128,10 +1128,10 @@ tr.best th,tr.best td{background:var(--pale)}
   <div class="scroll"><table class="tbl">
    <thead><tr><th>Date</th><th>Decision</th><th>Options considered</th><th>Owner</th><th>Rationale</th></tr></thead>
    <tbody>
-    <tr><td>Nov 20</td><td>Hold new project starts through mid-January</td><td>Start now, defer, trade one out</td><td>SAVP</td><td>Protect year-end peak and close</td></tr>
-    <tr><td>Nov 20</td><td>Workday transition enters design with an amber status</td><td>Design now, wait for IT, defer to FY28</td><td>SAVP and Director</td><td>Data mapping is the long pole</td></tr>
-    <tr><td>Nov 20</td><td>AI fund coding stays a pilot</td><td>Scale now, pilot, stop</td><td>Director</td><td>Agreement is below threshold</td></tr>
-    <tr><td>Nov 20</td><td>Year-end temporary help covers checks only</td><td>All gifts, checks only, no help</td><td>Director</td><td>Protects verification independence</td></tr>
+    <tr><td>Nov 25</td><td>Hold new project starts through mid-January</td><td>Start now, defer, trade one out</td><td>SAVP</td><td>Protect year-end peak and close</td></tr>
+    <tr><td>Nov 25</td><td>Workday transition enters design with an amber status</td><td>Design now, wait for IT, defer to FY28</td><td>SAVP and Director</td><td>Data mapping is the long pole</td></tr>
+    <tr><td>Nov 25</td><td>AI fund coding stays a pilot</td><td>Scale now, pilot, stop</td><td>Director</td><td>Agreement is below threshold</td></tr>
+    <tr><td>Nov 25</td><td>Year-end temporary help covers checks only</td><td>All gifts, checks only, no help</td><td>Director</td><td>Protects verification independence</td></tr>
    </tbody>
   </table></div>
  </div>
@@ -1270,7 +1270,7 @@ tr.best th,tr.best td{background:var(--pale)}
 (() => {
 'use strict';
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const TODAY = new Date('2026-11-20T12:00:00');
+const TODAY = new Date('2026-11-25T12:00:00');
 const DAY = 864e5;
 const d = s => new Date(s + 'T12:00:00');
 const iso = x => new Date(x).toISOString().slice(0, 10);
@@ -1338,10 +1338,10 @@ $('#pipe').innerHTML = '<div class="pipe">' + PIPE.map((p, i) => `<button class=
 $('#n-gifts').textContent = '612';
 
 const BATCH = [
- ['B-1120-01','Lockbox checks',64,48215,'Coordinator A','Coordinator B','Posted',['Total matches the bank deposit','Fund codes valid','No duplicate check numbers','Receipt template matches gift type']],
- ['B-1120-02','GiveCampus online',212,31880,'Automatic import','Coordinator A','Posted',['Total matches the GiveCampus settlement, net of fees recorded separately','Designations mapped to active funds','New donors checked against existing records before creation']],
- ['B-1120-03','Stock and wires',3,96400,'Director','Coordinator C','Held',['Stock valued at the mean of the high and low on the transfer date','Broker confirmation for one transfer not yet received','Wire matched to the bank statement']],
- ['B-1120-04','Matching gifts',18,14250,'Coordinator C','Pending','Verify',['Hard credit to the company, soft credit to the employee','Each match linked to the employee’s original gift']],
+ ['B-1125-01','Lockbox checks',64,48215,'Coordinator A','Coordinator B','Posted',['Total matches the bank deposit','Fund codes valid','No duplicate check numbers','Receipt template matches gift type']],
+ ['B-1125-02','GiveCampus online',212,31880,'Automatic import','Coordinator A','Posted',['Total matches the GiveCampus settlement, net of fees recorded separately','Designations mapped to active funds','New donors checked against existing records before creation']],
+ ['B-1125-03','Stock and wires',3,96400,'Director','Coordinator C','Held',['Stock valued at the mean of the high and low on the transfer date','Broker confirmation for one transfer not yet received','Wire matched to the bank statement']],
+ ['B-1125-04','Matching gifts',18,14250,'Coordinator C','Pending','Verify',['Hard credit to the company, soft credit to the employee','Each match linked to the employee’s original gift']],
  ['B-1119-05','Event registrations',41,9840,'Coordinator B','Coordinator A','Posted',['Good-faith value of the event recorded','Receipts state the quid pro quo amount for payments over $75']],
  ['B-1119-06','Payroll deduction',37,1295,'Coordinator A','Coordinator C','Posted',['Total matches the payroll file from Workday','Employee records linked to constituent records']]
 ];
@@ -1626,7 +1626,7 @@ $('#takeaways').innerHTML = [
 ].map(t => `<button class="tk ${t[0]}" data-open="${t[4]}"><b>${t[1]}</b><strong>${t[2]}</strong><span>${t[3]}</span></button>`).join('');
 const KP = [['FY27 receipts to date',musd(c27),`${pct(c27 / GOAL)} of a ${musd(GOAL)} goal`,'go:reports',''],['Gifts this week','612','Received through Friday','go:gifts',''],['Receipt timing','1.6 days','Median, target 2','go:gifts',''],['Complex gifts open','7','2 need action','go:gifts','warn'],['Feeds to review','1','Almabase, 46 records held','go:crm','warn'],['Likely duplicates','38','At 90% or more, of 214 scored','go:quality','']];
 $('#kpis').innerHTML = KP.map(k => `<button class="kpi ${k[4]}" data-open="${k[3]}"><strong>${k[1]}</strong><span>${k[0]}</span><small>${k[2]}</small></button>`).join('');
-const ACTS = [['Book temporary gift entry help for 12/14 to 1/15','Surge forecast','11/30','wk:7'],['Approve the Almabase class-year mapping, 46 records held','Feed health','11/23','sys:1'],['Get the payment schedule for the $150,000 EPI pledge','Complex gifts','11/24','cx:3'],['Weekly merge review, 38 pairs at 90% or more','Duplicates','11/25','go:quality'],['Test the Giving Tuesday live board with Annual Giving','Reports','11/30','go:reports'],['Start the November close: receipts by fund','Close calendar','12/1','go:close'],['NCOA address run before the year-end appeal','Record health','12/1','go:quality']];
+const ACTS = [['Book temporary gift entry help for 12/14 to 1/15','Surge forecast','11/30','wk:7'],['Approve the Almabase class-year mapping, 46 records held','Feed health','11/24','sys:1'],['Get the payment schedule for the $150,000 EPI pledge','Complex gifts','11/25','cx:3'],['Weekly merge review, 38 pairs at 90% or more','Duplicates','11/25','go:quality'],['Test the Giving Tuesday live board with Annual Giving','Reports','11/30','go:reports'],['Start the November close: receipts by fund','Close calendar','12/1','go:close'],['NCOA address run before the year-end appeal','Record health','12/1','go:quality']];
 $('#actions').innerHTML = ACTS.map(a => `<li><button class="linkbtn" data-open="${a[3]}">${esc(a[0])}</button><span>${esc(a[1])}</span><span class="due">${a[2]}</span></li>`).join('');
 
 const spark = (vals, good) => { const W = 90, H = 26, mn = Math.min(...vals), mx = Math.max(...vals), rg = mx - mn || 1;
