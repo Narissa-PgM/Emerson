@@ -564,6 +564,11 @@ tr.best th,tr.best td{background:var(--pale)}
 .pm-rag.p{background:var(--pale);color:var(--accent)}
 .pm-table td:first-child{min-width:190px}.pm-table td:nth-child(2){min-width:150px}.pm-table td:nth-child(5){min-width:150px}.pm-table td:last-child{min-width:170px}
 .pm-outline td:first-child{width:18%;white-space:nowrap}.pm-outline th,.pm-outline td{padding:6px 10px}
+.pm-matrix th,.pm-matrix td{padding:7px 8px}.pm-matrix td.num{text-align:center;font-variant-numeric:tabular-nums}
+.pm-matrix td:nth-child(2){min-width:185px}.pm-matrix th:nth-child(n+3):nth-child(-n+9){white-space:nowrap}
+.pm-score{display:inline-block;min-width:28px;padding:2px 6px;border-radius:3px;background:var(--soft);font-weight:700;text-align:center}
+.pm-score.hi{background:var(--green-pale);color:var(--green)}.pm-score.mid{background:var(--amber-pale);color:var(--amber)}.pm-score.lo{background:var(--soft);color:var(--muted)}
+.pm-review td:first-child{width:10%;white-space:nowrap}.pm-review td:nth-child(2){width:20%}
 .pm-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
 .pm-rule{background:var(--soft);border-left:3px solid var(--accent);padding:10px 12px;font-size:13px}
 .pm-rule b{display:block;font-size:13.5px;color:var(--accent);margin-bottom:2px}
@@ -1002,6 +1007,46 @@ tr.best th,tr.best td{background:var(--pale)}
    <div class="pm-rule"><b>Gate rule</b>No phase advance without the evidence named in the gate register and a named decision.</div>
    <div class="pm-rule"><b>Change rule</b>Any scope, date or budget change goes to the decision log with options and a sponsor decision.</div>
    <div class="pm-rule"><b>Resourcing</b>The three-person operations team supports every project. Close and year-end peak come first.</div>
+  </div>
+ </div>
+
+ <div class="card mt" id="pm-prioritize">
+  <h3>Strategic prioritization matrix</h3>
+  <p class="sub">The portfolio is not ranked by who asks loudest. Each project is scored 1 to 5 on five weighted criteria. Scores are planning judgments, not survey data.</p>
+  <div class="scroll"><table class="tbl pm-matrix">
+   <thead><tr><th>Rank</th><th>Project</th><th>Strategic fit<br>30%</th><th>Risk and compliance<br>25%</th><th>Benefit<br>20%</th><th>Capacity<br>15%</th><th>Dependency<br>10%</th><th>Weighted<br>score</th><th>Decision</th></tr></thead>
+   <tbody>
+    <tr><td><span class="pm-rag p">1</span></td><td><b>Workday Student transition</b></td><td class="num"><span class="pm-score hi">5</span></td><td class="num"><span class="pm-score hi">5</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score lo">2</span></td><td class="num"><span class="pm-score hi">5</span></td><td class="num"><b>4.35</b></td><td><span class="pm-rag g">Fund</span></td></tr>
+    <tr><td><span class="pm-rag p">2</span></td><td><b>Year-end gift and close readiness</b></td><td class="num"><span class="pm-score mid">3</span></td><td class="num"><span class="pm-score hi">5</span></td><td class="num"><span class="pm-score hi">5</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><b>4.15</b></td><td><span class="pm-rag g">Fund</span></td></tr>
+    <tr><td><span class="pm-rag p">3</span></td><td><b>Raiser’s Edge data quality</b></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score mid">3</span></td><td class="num"><b>3.90</b></td><td><span class="pm-rag g">Fund</span></td></tr>
+    <tr><td><span class="pm-rag p">4</span></td><td><b>Reporting modernization</b></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score mid">3</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score mid">3</span></td><td class="num"><b>3.65</b></td><td><span class="pm-rag g">Fund</span></td></tr>
+    <tr><td><span class="pm-rag p">5</span></td><td><b>AI fund coding pilot</b></td><td class="num"><span class="pm-score mid">3</span></td><td class="num"><span class="pm-score lo">2</span></td><td class="num"><span class="pm-score hi">4</span></td><td class="num"><span class="pm-score lo">2</span></td><td class="num"><span class="pm-score lo">2</span></td><td class="num"><b>2.70</b></td><td><span class="pm-rag a">Pilot only</span></td></tr>
+   </tbody>
+  </table></div>
+  <div class="pm-gate"><b>Portfolio decision:</b> fund the top four, keep AI fund coding as a time-boxed pilot and stop it if agreement stays below 90%. Must-do seasonal or compliance work is funded even if its rank slips. No project below 3.0 is scaled without a sponsor exception.</div>
+  <div class="pm-rules">
+   <div class="pm-rule"><b>Strategy</b>Does this still map to Emerson 2030 and Advancement Services’ operating priorities?</div>
+   <div class="pm-rule"><b>Risk</b>What compliance, audit or service failure does it prevent?</div>
+   <div class="pm-rule"><b>Capacity</b>Can the same three people deliver it without breaking close or peak?</div>
+   <div class="pm-rule"><b>Dependency</b>Does another project or gate depend on this one?</div>
+  </div>
+
+  <h4 class="h4 mt">Annual portfolio review</h4>
+  <p class="sub">A yearly reset for the next fiscal year, with a mid-year refresh. The review decides what to fund, defer, stop and hand off.</p>
+  <div class="scroll"><table class="tbl pm-review">
+   <thead><tr><th>When</th><th>Step</th><th>Owner</th><th>Output</th></tr></thead>
+   <tbody>
+    <tr><td><b>March</b></td><td>Call for project requests and collect benefits evidence</td><td>Director</td><td>Request log and benefit actuals</td></tr>
+    <tr><td><b>April</b></td><td>Score every request, test capacity and map dependencies</td><td>Director with Finance and IT</td><td>Prioritization matrix and capacity view</td></tr>
+    <tr><td><b>May</b></td><td>Portfolio board: fund, defer, stop or pilot</td><td>SAVP, Institutional Advancement</td><td>One-page portfolio slate</td></tr>
+    <tr><td><b>June</b></td><td>Publish the next fiscal-year portfolio and charters</td><td>Director</td><td>Approved slate, charters and gate dates</td></tr>
+    <tr><td><b>November</b></td><td>Mid-year refresh against benefits and capacity</td><td>SAVP and Director</td><td>Stop, continue or rebalance decisions</td></tr>
+   </tbody>
+  </table></div>
+  <div class="g3 mt">
+   <div class="pm-box"><h4>What the board decides</h4><p>Fund, defer, stop or pilot. No project enters the portfolio without a sponsor, a benefit, a named owner and a capacity check.</p></div>
+   <div class="pm-box"><h4>What the Director brings</h4><p>The scored matrix, benefit actuals, capacity load, dependency map and a recommended slate with the trade-offs shown.</p></div>
+   <div class="pm-box"><h4>What changes after</h4><p>The portfolio slate, charters, gate dates, capacity plan and benefit targets. The stop list is as important as the start list.</p></div>
   </div>
  </div>
 
@@ -2064,7 +2109,7 @@ const SUBS = {
  reports:[['Goal progress and forecast',['progress']],['Weekly report and catalog',['weekly','catalog']],['Lapsed donor renewal',['lybunt']],['Portfolio health',['portfolio']]],
  lab:[['Donor behavior',['flow','behav']],['Cohorts and segments',['cohort','conc','rfm','kmeans']],['Timing and geography',['calendar','tilemap']],['Forecast models',['fcast','mape','season']],['Renewal models',['roc','calib','thresh']],['AI for data quality',['anom','nb']],['Model governance',['models']]],
  team:[['Coverage',['coverage']],['Communication rhythm',['rhythm']],['Workload and partners',['workload','partners']],['Training and task forces',['training','taskforce']],['First 90 days',['ninety']]],
- projects:[['Portfolio',['pm-portfolio']],['Workday charter',['pm-charter']],['RAID and gates',['pm-raid','pm-gates']],['Benefits',['pm-benefits']]]
+ projects:[['Portfolio',['pm-portfolio']],['Prioritization',['pm-prioritize']],['Workday charter',['pm-charter']],['RAID and gates',['pm-raid','pm-gates']],['Benefits',['pm-benefits']]]
 };
 Object.entries(SUBS).forEach(([pid, subs]) => {
  const panel = document.getElementById(pid); if (!panel) return;
