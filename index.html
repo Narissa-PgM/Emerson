@@ -353,6 +353,45 @@ dialog .next{background:var(--soft);border-left:3px solid var(--accent);padding:
 @media(max-width:1000px){.dgroups{grid-template-columns:repeat(2,minmax(0,1fr))}.comm{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.dgroups{grid-template-columns:1fr}.comm{grid-template-columns:1fr}}
 
+/* Role areas: duties + SMARTER + SWOT */
+.area-frame{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;background:var(--soft);border-left:4px solid var(--accent);padding:12px 14px;margin:12px 0}
+.area-frame h3{font-size:20px;margin:3px 0 5px}
+.area-frame p{font-size:13.5px;color:var(--muted);margin:0}.area-frame p+p{margin-top:6px}
+.area-values{display:flex;flex-wrap:wrap;gap:5px;align-content:start}
+.area-values span{font-size:11.5px;background:var(--paper);border:1px solid var(--line);padding:3px 7px;color:var(--accent)}
+.area-legend{font-size:12.5px;color:var(--muted);background:var(--paper);border-left:3px solid var(--amber);padding:8px 10px;margin:10px 0 0}
+.area-legend b{color:var(--ink)}
+.area-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.area-card{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);padding:14px;display:flex;flex-direction:column;min-width:0}
+.area-head{display:flex;justify-content:space-between;gap:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.area-head b{font-size:13px}.area-head span{color:var(--muted)}
+.area-card h3{font-size:20px;margin:5px 0 4px}
+.area-card .area-desc{font-size:13px;color:var(--muted);min-height:36px;margin:0}
+.area-duty{margin:9px 0 2px;padding-top:8px;border-top:1px solid var(--line)}
+.area-duty .cap{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.area-duty .cap span{color:var(--muted);text-transform:none;letter-spacing:.02em}
+.area-duty ol{list-style:none;counter-reset:ad;margin:0;padding:0;display:grid;gap:2px}
+.area-duty li{counter-increment:ad;display:grid;grid-template-columns:18px 1fr;gap:5px;font-size:11.5px;line-height:1.35;color:var(--muted)}
+.area-duty li::before{content:counter(ad,decimal-leading-zero);font-size:10px;font-weight:700;color:var(--accent)}
+.area-sm{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:9px 0 0;padding-top:8px;border-top:1px solid var(--line)}
+.area-sm div{display:grid;grid-template-columns:18px 1fr;gap:4px;background:var(--soft);padding:4px 5px;font-size:10.5px;line-height:1.3;color:var(--muted)}
+.area-sm b{display:grid;place-items:center;width:17px;height:17px;background:var(--pale);color:var(--accent);font-size:9.5px}
+.area-swot{margin:8px 0 0;border:1px solid var(--line);background:var(--paper)}
+.area-swot summary{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:6px 7px;background:var(--soft);cursor:pointer;list-style:none;font-size:11px}
+.area-swot summary::-webkit-details-marker{display:none}
+.area-swot .lab{font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);font-size:10px}
+.urg{font-weight:700;font-size:9.5px;letter-spacing:.03em;text-transform:uppercase;padding:2px 4px;border:1px solid currentColor}
+.urg.high{color:#9a2f45;background:#fbe9ee}.urg.medium{color:#7a5515;background:#fbf1dd}.urg.low{color:#3d6650;background:#e8f1ea}
+.area-swot .why{font-size:10.5px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.area-swot .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px}
+.area-swot h4{margin:0 0 2px;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.area-swot ul{margin:0;padding-left:12px;font-size:10.5px;line-height:1.35;color:var(--muted)}
+.area-action{margin:7px 0 0;font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:6px}
+.area-action b{color:var(--ink)}
+.area-open{margin-top:auto;border:0;border-top:1px solid var(--line);background:none;padding:9px 0 0;text-align:left;color:var(--accent);font-size:12px;font-weight:700}
+@media(max-width:1000px){.area-grid{grid-template-columns:1fr}.area-frame{grid-template-columns:1fr}}
+@media(max-width:600px){.area-sm{grid-template-columns:1fr}.area-swot .grid{grid-template-columns:1fr}}
+
 /* ---- v5 sub-index and evidence popups ---- */
 .subnav{position:sticky;top:var(--tabs-h,52px);z-index:9;display:flex;gap:6px;flex-wrap:wrap;background:var(--bg);padding:8px 0 10px;margin:0 0 14px;border-bottom:1px solid var(--line)}
 .subnav button{border:1px solid var(--line);background:var(--paper);border-radius:16px;padding:5px 13px;font-size:13.5px;color:var(--muted)}
@@ -623,6 +662,7 @@ tr.best th,tr.best td{background:var(--pale)}
 <nav class="tabs" aria-label="Hub sections"><div class="wrap" role="tablist">
  <button class="tab" role="tab" id="t-overview" aria-controls="overview" aria-selected="true">Overview</button>
  <button class="tab" role="tab" id="t-emerson" aria-controls="emerson" aria-selected="false" tabindex="-1">Emerson</button>
+<button class="tab" role="tab" id="t-areas" aria-controls="areas" aria-selected="false" tabindex="-1">Role areas</button>
  <button class="tab" role="tab" id="t-gifts" aria-controls="gifts" aria-selected="false" tabindex="-1"><b class="gn">1</b>Gifts<small id="n-gifts"></small></button>
  <button class="tab" role="tab" id="t-close" aria-controls="close" aria-selected="false" tabindex="-1"><b class="gn">2</b>Close</button>
  <button class="tab" role="tab" id="t-crm" aria-controls="crm" aria-selected="false" tabindex="-1"><b class="gn">3</b>CRM<small id="n-feeds"></small></button>
@@ -732,6 +772,17 @@ tr.best th,tr.best td{background:var(--pale)}
   <p class="sub">Published by Emerson College and its partners, checked November 20, 2026.</p>
   <ul class="srcl" id="sources"></ul>
  </div>
+</section>
+
+<!-- ================= ROLE AREAS ================= -->
+<section class="panel" id="areas" role="tabpanel" aria-labelledby="t-areas">
+ <div class="ph"><div><p class="eyebrow">Role areas</p><h2>Six areas, every duty, and the urgency behind each one</h2></div><p>Adapted from the role-area model in my BC High portfolio. The structure is the same: duties, SMARTER, SWOT and a priority action. The purpose frame is Emerson’s, not Jesuit: Extraordinary Emerson 2030 and the college’s values.</p></div>
+ <div class="area-frame">
+  <div><p class="eyebrow">The frame</p><h3>Emerson 2030 is the why. SMARTER is the test.</h3><p>The six areas below carry the posting’s 16 duties. Each card shows the exact duties, the SMARTER test, a SWOT and a working urgency rating. AMDG belongs to the BC High portfolio; it is not used here.</p></div>
+  <div class="area-values"><span>Creativity</span><span>Innovation</span><span>Inclusion</span><span>Curiosity</span><span>Equity</span><span>Expression</span><span>Collaboration</span></div>
+ </div>
+ <p class="area-legend"><b>Urgency:</b> High = year-end, audit or system impact within 30 days · Medium = control risk within 90 days · Low = monitor. SWOT is a working assessment from this sample, not an Emerson audit.</p>
+ <div class="area-grid" id="area-grid"></div>
 </section>
 
 <!-- ================= 1 GIFTS ================= -->
@@ -1842,6 +1893,23 @@ const DUTIES = [
  ['team','Communicate through department meetings, one-on-ones and email','team#rhythm'],
  ['team','Represent Institutional Advancement on data and technology task forces','team#taskforce,partners']
 ];
+
+/* Role areas: duties + SMARTER + SWOT, adapted to Emerson */
+const AREA_META = {
+ gifts:{u:'High',why:'Year-end volume',desc:'Gift entry, receipts and complex gifts.',sm:[['S','2 duties'],['M','Receipts within 2 days'],['A','Peak staffing'],['R','Year-end trust'],['T','Giving Tuesday'],['E·R','Weekly review']],s:['Gift entry standards','Coordinator coverage'],w:['Manual receipts','Peak volume'],o:['Automate receipts','Reuse the gift checklist'],t:['Year-end and tax deadlines','A single coordinator becomes a bottleneck'],a:'Staff the year-end peak by November 1.'},
+ close:{u:'High',why:'Audit and close',desc:'Monthly and yearly close, reconciliation and audit.',sm:[['S','2 duties'],['M','Close by day 5'],['A','Finance partnership'],['R','Audit-ready'],['T','Monthly close'],['E·R','Tie-out review']],s:['Finance partnership','Recurring close rhythm'],w:['Manual reconciliations','Parallel grant work'],o:['Automate the tie-out','One close calendar'],t:['Audit requests','Workday data mapping'],a:'Publish the close calendar and tie-out owner by day 10.'},
+ crm:{u:'High',why:'Release and access risk',desc:'Raiser’s Edge, Blackbaud and connected systems.',sm:[['S','3 duties'],['M','100% feed health'],['A','Blackbaud and IT'],['R','One CRM'],['T','Release calendar'],['E·R','Change review']],s:['RE ownership','Blackbaud liaison'],w:['Integration fragility','Release surprises'],o:['Workday and PeopleGrove map','Documented fallbacks'],t:['A release or outage','Access loss'],a:'Publish the release calendar and fallback by day 30.'},
+ quality:{u:'Medium',why:'Duplicate backlog',desc:'Controls, hygiene, training and confidentiality.',sm:[['S','3 duties'],['M','Duplicate rate below 2%'],['A','Training and access'],['R','Trusted records'],['T','Quarterly audit'],['E·R','Corrective review']],s:['Data controls','Training program'],w:['Duplicate backlog','Inconsistent ownership'],o:['Stewardship data','Self-serve corrections'],t:['Bad data in board reports','Privacy exposure'],a:'Clear the duplicate queue and publish the access review.'},
+ reports:{u:'Medium',why:'Partner demand',desc:'Standard and custom reports, dashboards and advice.',sm:[['S','3 duties'],['M','Monday report on time'],['A','Clean source data'],['R','Partner decisions'],['T','Weekly'],['E·R','Reader feedback']],s:['Weekly report','Partner relationships'],w:['Ad hoc requests','Repeated extracts'],o:['Dashboards','One reporting catalog'],t:['Partner deadlines','Conflicting definitions'],a:'Make the Monday report the single source and retire duplicate extracts.'},
+ team:{u:'Medium',why:'Peak coverage',desc:'Direct reports, communication and task forces.',sm:[['S','3 duties'],['M','Every task covered'],['A','Cross-training'],['R','Retention and service'],['T','Quarterly'],['E·R','Coverage review']],s:['Small team','Clear rhythms'],w:['Peak coverage','Single points of failure'],o:['Cross-training','Automation'],t:['Turnover or leave','Year-end peak'],a:'Publish the coverage matrix and cross-training plan.'}
+};
+const areaList = a => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+const areaGrid = $('#area-grid');
+if (areaGrid) areaGrid.innerHTML = GROUPS.map(([g, name], i) => {
+ const m = AREA_META[g]; if (!m) return '';
+ const duties = DUTIES.filter(x => x[0] === g);
+ return `<article class="area-card"><div class="area-head"><b>${String(i + 1).padStart(2, '0')}</b><span>${duties.length} duties</span></div><h3>${esc(name)}</h3><p class="area-desc">${esc(m.desc)}</p><div class="area-duty"><p class="cap"><b>Responsibilities</b><span>${duties.length} duties</span></p><ol>${duties.map(d => `<li>${esc(d[1])}</li>`).join('')}</ol></div><div class="area-sm">${m.sm.map(([k, v]) => `<div><b>${k}</b><span>${esc(v)}</span></div>`).join('')}</div><details class="area-swot"><summary><span class="lab">SWOT</span><span class="urg ${m.u.toLowerCase()}">Urgency: ${m.u}</span><span class="why">${esc(m.why)}</span></summary><div class="grid"><div><h4>Strengths</h4>${areaList(m.s)}</div><div><h4>Weaknesses</h4>${areaList(m.w)}</div><div><h4>Opportunities</h4>${areaList(m.o)}</div><div><h4>Threats</h4>${areaList(m.t)}</div></div></details><p class="area-action"><b>Priority action:</b> ${esc(m.a)}</p><button class="area-open" data-tab-open="${g}">Open the ${esc(name)} tab ↗</button></article>`;
+}).join('');
 $('#dutymap').innerHTML = '<div class="dgroups">' + GROUPS.map(([g, name], gi) => `<div class="dgroup"><button class="dghead" data-open="go:${g}"><b>${gi + 1}</b>${esc(name)}</button>${DUTIES.filter(x => x[0] === g).map(x => `<button class="duty" data-go="${x[2]}" data-title="${esc(x[1])}" data-group="${esc(name)}">${esc(x[1])}</button>`).join('')}</div>`).join('') + '</div>';
 
 $('#context').innerHTML = [['Reports to','Senior Associate Vice President for Institutional Advancement'],['CRM','Blackbaud Raiser’s Edge'],['Connected systems','PeopleGrove, Emma, GiveCampus, Almabase, Workday'],['Team','Gifts & Data Coordinators'],['Campus partners','The Schools and Deans, Emerson Prison Initiative, Media & Arts Ventures (ArtsEmerson, WERS), Athletics, Research & Creative Scholarship, IT, Finance'],['Strategic plan','Extraordinary Emerson 2030, to the 150th anniversary'],['Values','Creativity, innovation, inclusion, curiosity, equity, expression, collaboration']].map(c => `<li><i style="background:var(--accent)"></i><span><b>${c[0]}.</b> ${c[1]}</span><span></span></li>`).join('');
@@ -2192,6 +2260,7 @@ $('#models').innerHTML = '<div class="scroll"><table class="tbl"><thead><tr><th 
 const SUBS = {
  overview:[['At a glance',['surge','actions']],['Scorecard',['scorecard']],['Year wheel',['wheel']],['Gift lifecycle',['life']],['Duties in the posting',['dutymap']],['Experience and context',['context']]],
  emerson:[['Mission and values',['mission','values']],['Priorities and initiatives',['prio','initiatives']],['Recent milestones',['gday','milestones']],['Sources',['sources']]],
+ areas:[['All six areas',['area-grid']]],
  gifts:[['Pipeline',['pipe']],['Batch board',['batches']],['Complex gifts and receipts',['complex','rcpt']],['Biographical updates',['bio']],['Gift entry standards',['standards']],['Pledges and write-offs',['pledges']]],
  close:[['Monthly reconciliation',['recon']],['October bridge and close calendar',['waterfall','closecal']],['Audit and gift or grant',['audit','giftgrant']],['Year-end close',['yearend']]],
  crm:[['System map and feeds',['sysmap','feeds']],['Release and change log',['changes']],['Blackbaud watch',['bbsrc','bbkb']],['Procedures',['sops']]],
@@ -2213,7 +2282,7 @@ Object.entries(SUBS).forEach(([pid, subs]) => {
  });
  const nav = document.createElement('div'); nav.className = 'subnav'; nav.dataset.panel = pid; nav.setAttribute('role', 'tablist'); nav.setAttribute('aria-label', 'Sections in this tab');
  const gnum = GROUPS.findIndex(g => g[0] === pid) + 1;
- nav.innerHTML = `<span class="sublab">${gnum ? gnum + ' · ' + esc(GROUPS[gnum - 1][1]) : ({emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview')}</span>` + subs.map((sb, i) => `<button role="tab" data-sub="${i}" aria-selected="${i === 0}"><b>${gnum ? gnum + '.' + (i + 1) : i + 1}</b>${esc(sb[0])}</button>`).join('');
+ nav.innerHTML = `<span class="sublab">${gnum ? gnum + ' · ' + esc(GROUPS[gnum - 1][1]) : ({emerson:'Emerson 2030', areas:'Role areas', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview')}</span>` + subs.map((sb, i) => `<button role="tab" data-sub="${i}" aria-selected="${i === 0}"><b>${gnum ? gnum + '.' + (i + 1) : i + 1}</b>${esc(sb[0])}</button>`).join('');
  nav.hidden = pid !== 'overview';
  $('#subbar').appendChild(nav);
  nav.addEventListener('click', e => { const b = e.target.closest('button[data-sub]'); if (b) showSub(pid, +b.dataset.sub, true); });
@@ -2229,7 +2298,7 @@ function showSub(pid, k, user) {
 /* Sub-index dropdown from the top tab line */
 const subindex = $('#subindex');
 let subindexTimer;
-const panelName = pid => (GROUPS.find(g => g[0] === pid) || [pid, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview'])[1];
+const panelName = pid => (GROUPS.find(g => g[0] === pid) || [pid, {emerson:'Emerson 2030', areas:'Role areas', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview'])[1];
 function closeSubindex() {
  if (!subindex) return;
  clearTimeout(subindexTimer);
@@ -2281,7 +2350,7 @@ function openEvidence(t) {
  dlg.classList.add('wide');
  openDlg(`<p class="eyebrow">${esc(grp)} · evidence</p><h3 id="dlg-title">${esc(title)}</h3><div class="evidence">${html}</div><p style="margin-top:14px"><button class="linkbtn" data-go="${tab}" data-sub="${subIdx < 0 ? 0 : subIdx}">Open this in the ${esc(grp)} tab</button></p>`, t);
 }
-$('#index-btn').addEventListener('click', e => { e.stopPropagation(); const blocks = [['overview','Overview'],['emerson','Emerson 2030']].concat(GROUPS).concat([['projects','Project portfolio'],['evidence','Evidence'],['lab','AI & analytics lab']]).map(([pid, name]) => { const gi = GROUPS.findIndex(g => g[0] === pid) + 1; return `<div class="ixg"><button class="ixh" data-go="${pid}" data-sub="0">${gi ? '<b>' + gi + '</b>' : ''}${esc(name)}</button><ol>${SUBS[pid].map((sb, k) => `<li><button data-go="${pid}" data-sub="${k}"><span>${gi ? gi + '.' + (k + 1) : k + 1}</span>${esc(sb[0])}</button></li>`).join('')}</ol></div>`; }).join(''); dlg.classList.add('wide'); openDlg(`<p class="eyebrow">Index</p><h3 id="dlg-title">Every tab and section</h3><div class="ixgrid">${blocks}</div>`, e.currentTarget); });
+$('#index-btn').addEventListener('click', e => { e.stopPropagation(); const blocks = [['overview','Overview'],['emerson','Emerson 2030'],['areas','Role areas']].concat(GROUPS).concat([['projects','Project portfolio'],['evidence','Evidence'],['lab','AI & analytics lab']]).map(([pid, name]) => { const gi = GROUPS.findIndex(g => g[0] === pid) + 1; return `<div class="ixg"><button class="ixh" data-go="${pid}" data-sub="0">${gi ? '<b>' + gi + '</b>' : ''}${esc(name)}</button><ol>${SUBS[pid].map((sb, k) => `<li><button data-go="${pid}" data-sub="${k}"><span>${gi ? gi + '.' + (k + 1) : k + 1}</span>${esc(sb[0])}</button></li>`).join('')}</ol></div>`; }).join(''); dlg.classList.add('wide'); openDlg(`<p class="eyebrow">Index</p><h3 id="dlg-title">Every tab and section</h3><div class="ixgrid">${blocks}</div>`, e.currentTarget); });
 
 /* ================= TABS ================= */
 const tabs = $$('.tab');
@@ -2303,6 +2372,7 @@ const start = location.hash.slice(1);
 const [startTab, startSub] = start.split('/');
 if ($$('.panel').some(p => p.id === startTab)) { show(startTab, false); if (startSub !== undefined && !Number.isNaN(+startSub)) showSub(startTab, +startSub, false); }
 window.FA_show = show;
+document.addEventListener('click', e => { const b = e.target.closest('[data-tab-open]'); if (!b) return; show(b.dataset.tabOpen); });
 window.__EM = {SIM, DUP, LY};
 
 /* Career profile popup */
