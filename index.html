@@ -569,6 +569,18 @@ tr.best th,tr.best td{background:var(--pale)}
 .pm-score{display:inline-block;min-width:28px;padding:2px 6px;border-radius:3px;background:var(--soft);font-weight:700;text-align:center}
 .pm-score.hi{background:var(--green-pale);color:var(--green)}.pm-score.mid{background:var(--amber-pale);color:var(--amber)}.pm-score.lo{background:var(--soft);color:var(--muted)}
 .pm-review td:first-child{width:10%;white-space:nowrap}.pm-review td:nth-child(2){width:20%}
+.ev-cov td:first-child{width:25%}.ev-cov td:nth-child(2){width:24%}.ev-cov td:nth-child(3){width:29%}.ev-cov td:last-child{width:12%}
+.ev-cov td{padding:7px 9px}.ev-cov .tag{display:inline-block;padding:1px 6px;border-radius:9px;background:var(--pale);color:var(--accent);font-size:10.5px;font-weight:700;white-space:nowrap}
+.ev-reports{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ev-report{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--slate);padding:12px 14px}
+.ev-report:nth-child(1){border-top-color:var(--accent)}.ev-report:nth-child(2){border-top-color:var(--gold)}.ev-report:nth-child(3){border-top-color:var(--slate)}.ev-report:nth-child(4){border-top-color:var(--green)}.ev-report:nth-child(5){border-top-color:var(--amber)}.ev-report:nth-child(6){border-top-color:var(--accent)}
+.ev-report .etag{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:3px}
+.ev-report h4{font-size:15px;margin:0 0 3px}.ev-report p{font-size:12.5px;color:var(--muted);margin:0 0 5px}.ev-report ul{margin:0 0 6px;padding-left:16px;font-size:12px;display:grid;gap:2px}.ev-report .dec{font-size:11.5px;border-top:1px solid var(--line);padding-top:5px;color:var(--ink)}.ev-report .dec b{color:var(--accent)}
+.ev-ready{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ev-step{background:var(--soft);border-top:3px solid var(--slate);padding:12px 14px}.ev-step b{display:block;color:var(--accent);font-size:12px;letter-spacing:.05em;text-transform:uppercase}.ev-step h4{font-size:15px;margin:3px 0}.ev-step p,.ev-step li{font-size:12.5px}.ev-step ul{margin:0;padding-left:16px;display:grid;gap:2px}
+.ev-legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12.5px;color:var(--muted);margin:8px 0}.ev-legend b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--pale);color:var(--accent);margin-right:4px;font-size:11px}
+@media(max-width:900px){.ev-reports{grid-template-columns:repeat(2,1fr)}.ev-ready{grid-template-columns:1fr}}
+@media(max-width:600px){.ev-reports{grid-template-columns:1fr}}
 .pm-rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
 .pm-rule{background:var(--soft);border-left:3px solid var(--accent);padding:10px 12px;font-size:13px}
 .pm-rule b{display:block;font-size:13.5px;color:var(--accent);margin-bottom:2px}
@@ -618,6 +630,7 @@ tr.best th,tr.best td{background:var(--pale)}
  <button class="tab" role="tab" id="t-reports" aria-controls="reports" aria-selected="false" tabindex="-1"><b class="gn">5</b>Reports</button>
  <button class="tab" role="tab" id="t-team" aria-controls="team" aria-selected="false" tabindex="-1"><b class="gn">6</b>Team</button>
  <button class="tab" role="tab" id="t-projects" aria-controls="projects" aria-selected="false" tabindex="-1">Projects</button>
+ <button class="tab" role="tab" id="t-evidence" aria-controls="evidence" aria-selected="false" tabindex="-1">Evidence</button>
  <button class="tab" role="tab" id="t-lab" aria-controls="lab" aria-selected="false" tabindex="-1">AI lab</button>
 </div><div class="subbar"><div class="wrap sbw"><div id="subbar"></div><button class="index-btn" id="index-btn" aria-haspopup="dialog">☰ Full index</button><div class="subindex" id="subindex" role="menu" aria-label="Sub-index" hidden></div></div></div></nav>
 
@@ -1160,6 +1173,84 @@ tr.best th,tr.best td{background:var(--pale)}
    <div class="pm-box"><h4>Handoff</h4><p>Named owner for the steady-state process, the procedure and the next review date.</p></div>
    <div class="pm-box"><h4>Lessons</h4><p>One thing to repeat, one thing to change and one thing to stop before the next project.</p></div>
   </div>
+ </div>
+</section>
+<!-- ================= EVIDENCE ================= -->
+<section class="panel" id="evidence" role="tabpanel" aria-labelledby="t-evidence">
+ <div class="ph"><div><p class="eyebrow">Application evidence</p><h2>Every duty, the report it produces, and the rights to decide</h2></div><p>This tab connects the posting to prior experience, the expected outcome by day 90 and a work sample. It is the cross-check, not a second operations hub.</p></div>
+
+ <div class="card" id="ev-coverage">
+  <h3>Duty coverage · 16 duties from JR009308</h3>
+  <p class="sub">Consolidates the 11 essential duties and the summary’s training, policy and confidentiality duty. Other duties as assigned remain with the SAVP.</p>
+  <div class="scroll"><table class="tbl ev-cov">
+   <thead><tr><th>Duty</th><th>Prior experience</th><th>Expected outcome by day 90</th><th>Evidence</th></tr></thead>
+   <tbody>
+    <tr><td><span class="tag">Gifts</span> Manage the Gifts &amp; Data Coordinators, gift processing, biographical updates, tax receipts and gift entry standards.</td><td>UAMS: three-person team, 20,000+ annual gifts. Phillips: gift services and reporting.</td><td>Named owner and backup for every batch, balanced deposit and receipt within two business days.</td><td><button class="linkbtn" data-go="gifts">Gifts tab</button></td></tr>
+    <tr><td><span class="tag">Gifts</span> Process complex gifts, commitments and write-offs.</td><td>UAMS and Phillips: complex gifts, pledges, write-offs and documented gift policy.</td><td>Every complex gift has a rule, an approval and an audit trail before posting.</td><td><button class="linkbtn" data-go="gifts">Gifts tab</button></td></tr>
+    <tr><td><span class="tag">Close</span> Reconcile monthly and yearly closeouts with Finance and support audits.</td><td>UAMS and Phillips: monthly GL tie-outs, audit support and Comptroller coordination.</td><td>Signed tie-out by day 6 with every difference explained and owned.</td><td><button class="linkbtn" data-go="close">Close tab</button></td></tr>
+    <tr><td><span class="tag">Partners</span> Work with IT, Media &amp; Arts Ventures, Research &amp; Creative Scholarship, Athletics and Finance on gifts and grants.</td><td>UAMS: two foundations. Harvard: 50+ departments and central offices.</td><td>One gift-or-grant decision, documented before the award is recorded.</td><td><button class="linkbtn" data-go="close">Close tab</button></td></tr>
+    <tr><td><span class="tag">Systems</span> Manage Raiser’s Edge workflows, data integrity and documented procedures.</td><td>UAMS and Phillips: Raiser’s Edge conversions and workflow ownership.</td><td>Every critical workflow has a current procedure, an owner and a tested backup.</td><td><button class="linkbtn" data-go="crm">CRM tab</button></td></tr>
+    <tr><td><span class="tag">Vendor</span> Serve as primary technical liaison to Blackbaud, following releases, known issues and peer forums.</td><td>Vendor coordination through two CRM conversions. A direct Blackbaud relationship would be new.</td><td>Release calendar, known-issues log and escalation path visible to IT and the team.</td><td><button class="linkbtn" data-go="crm">CRM tab</button></td></tr>
+    <tr><td><span class="tag">Systems</span> Design and maintain systems that supplement the CRM: PeopleGrove, Emma, GiveCampus, Almabase, Workday.</td><td>iModules, CyberSource, Salesforce and Workday exposure. PeopleGrove, Emma and Almabase would be new.</td><td>Every feed has a source, owner, schedule, control total and failure path.</td><td><button class="linkbtn" data-go="crm">CRM tab</button></td></tr>
+    <tr><td><span class="tag">Data</span> Enforce data entry controls, run hygiene and audits, and provide training and corrective review.</td><td>UAMS and Phillips: audit sampling, duplicate controls and corrective training.</td><td>Weekly 5% audit, a named error owner and a refresher tied to each error type.</td><td><button class="linkbtn" data-go="quality">Data tab</button></td></tr>
+    <tr><td><span class="tag">Policy</span> Manage training, information and policies on information management, gift accounting and confidentiality.</td><td>UAMS and Phillips: gift policy, record retention and confidentiality controls.</td><td>Policies reviewed, versioned and acknowledged by every person who handles donor data.</td><td><button class="linkbtn" data-go="quality">Data tab</button></td></tr>
+    <tr><td><span class="tag">Partners</span> Work with campus leaders, including the Schools, EPI and Media &amp; Arts Ventures, on biographical, gift and engagement data.</td><td>Harvard: shared definitions across 50+ departments. UAMS: foundation and hospital partners.</td><td>A request log with purpose, approval, minimum data and release date.</td><td><button class="linkbtn" data-go="quality">Data tab</button></td></tr>
+    <tr><td><span class="tag">Reports</span> Oversee standard and custom reports, dashboards, list tools and data improvement projects.</td><td>Harvard: governed dashboards, report catalog and self-service views. Phillips: board reporting.</td><td>A report catalog with audience, definition, owner and refresh date.</td><td><button class="linkbtn" data-go="reports">Reports tab</button></td></tr>
+    <tr><td><span class="tag">Reports</span> Distribute weekly gift reports to Deans, WERS, ArtsEmerson, EPI and Athletics.</td><td>Phillips and Harvard: weekly and board-level reporting across partners.</td><td>One Monday report per partner, with the same source and definition.</td><td><button class="linkbtn" data-go="reports">Reports tab</button></td></tr>
+    <tr><td><span class="tag">Advice</span> Initiate conversations with frontline fundraisers on donor engagement data.</td><td>Phillips and UAMS: annual giving, pipeline and stewardship reporting with gift officers.</td><td>A short monthly insight note with one segment and one next action, not a data dump.</td><td><button class="linkbtn" data-go="reports">Reports tab</button></td></tr>
+    <tr><td><span class="tag">Team</span> Manage direct reports and keep every task covered.</td><td>UAMS: hired, supervised and reviewed a team of three through campaign and conversion.</td><td>Every critical process has a primary, a backup and a development plan.</td><td><button class="linkbtn" data-go="team">Team tab</button></td></tr>
+    <tr><td><span class="tag">Team</span> Communicate through department meetings, one-on-ones and email.</td><td>UAMS and Harvard: team rhythm, stakeholder sessions and written updates.</td><td>A published rhythm, a decision log and no surprise escalations.</td><td><button class="linkbtn" data-go="team">Team tab</button></td></tr>
+    <tr><td><span class="tag">Partner</span> Represent Institutional Advancement on data and technology task forces.</td><td>Harvard: liaison to FD&amp;D, EDIB, Affirmative Action, DataHub and Ivy League Plus/COFHE. Emerson task forces would be new.</td><td>A written position, a decision request and a report-back after every task force.</td><td><button class="linkbtn" data-go="team">Team tab</button></td></tr>
+   </tbody>
+  </table></div>
+ </div>
+
+ <div class="card mt" id="ev-reports">
+  <h3>Six sample reports</h3>
+  <p class="sub">Formats, audiences and decisions. The live Reports tab carries the working previews; these are the six issues I would own.</p>
+  <div class="ev-reports">
+   <article class="ev-report"><span class="etag">Weekly · Deans and campus partners</span><h4>Weekly gift report</h4><p>Monday, one page. Sent to the Deans, WERS, ArtsEmerson, EPI and Athletics.</p><ul><li>Gifts and receipts by School and fund</li><li>New commitments and variances</li><li>Next action for each partner</li></ul><p class="dec"><b>Decision:</b> where the week needs follow-up.</p></article>
+   <article class="ev-report"><span class="etag">Monthly · Finance</span><h4>Close and reconciliation</h4><p>By business day 6. Raiser’s Edge to Workday, with every difference explained.</p><ul><li>Receipts by fund and date</li><li>Reconciling items and owners</li><li>Accrual and sign-off</li></ul><p class="dec"><b>Decision:</b> close the month or hold an item.</p></article>
+   <article class="ev-report"><span class="etag">Quarterly · Board</span><h4>Board advancement report</h4><p>Two pages. Results, risks and one clear ask for Trustees.</p><ul><li>Goal progress and forecast</li><li>Endowment and restricted funds</li><li>Risks with owners</li></ul><p class="dec"><b>Decision:</b> approve, adjust or escalate.</p></article>
+   <article class="ev-report"><span class="etag">Weekly · Team</span><h4>Data quality review</h4><p>One page for the Gifts &amp; Data team. Errors, duplicates and training.</p><ul><li>5% audit results</li><li>Duplicate and merge queue</li><li>Field health and fixes</li></ul><p class="dec"><b>Decision:</b> what gets fixed this week.</p></article>
+   <article class="ev-report"><span class="etag">Each release · IT and Blackbaud</span><h4>Release and known issues</h4><p>Before and after every Raiser’s Edge change.</p><ul><li>What changes and who is affected</li><li>Test result and rollback</li><li>Known issue and workaround</li></ul><p class="dec"><b>Decision:</b> release, delay or roll back.</p></article>
+   <article class="ev-report"><span class="etag">Annual · Finance and auditors</span><h4>Audit evidence index</h4><p>One index for the FY audit, mapped to requests and owners.</p><ul><li>Gift and pledge samples</li><li>Reconciliation and approvals</li><li>Open items and dates</li></ul><p class="dec"><b>Decision:</b> what is ready and what is missing.</p></article>
+  </div>
+ </div>
+
+ <div class="card mt" id="ev-ready">
+  <h3>Day 30 readiness gate</h3>
+  <p class="sub">Learn the systems in a test environment first. No production gift entry, release or close sign-off until the parallel work is reviewed.</p>
+  <div class="ev-ready">
+   <div class="ev-step"><b>Days 1 to 10</b><h4>Map access</h4><p>Raiser’s Edge permissions, Workday extracts, fund codes, gift types and report definitions.</p><ul><li>Least-privilege access</li><li>Named Finance and IT reviewers</li><li>Current procedures read</li></ul></div>
+   <div class="ev-step"><b>Days 11 to 20</b><h4>Rehearse in test</h4><p>One batch, one correction, one receipt run, one reconciliation and one weekly report.</p><ul><li>Approved test records</li><li>Import replay</li><li>Rollback tested</li></ul></div>
+   <div class="ev-step"><b>By day 30</b><h4>Show readiness</h4><p>A reviewed parallel batch and received-gift report, signed before production work.</p><ul><li>Batch balances</li><li>Report ties to source</li><li>Finance reviewer signs</li></ul></div>
+  </div>
+  <div class="g2 mt">
+   <div class="pm-box"><h4>What the plan needs</h4><ul><li>SAVP-approved scope and priorities</li><li>Test environment and finance extract</li><li>Named reviewers in Finance and IT</li><li>Protected review time for the team</li></ul></div>
+   <div class="pm-box"><h4>Gate criteria</h4><ul><li>One parallel batch balances to deposit</li><li>One received-gift report ties to source</li><li>One exception has a documented owner</li><li>One backup is trained on each step</li></ul></div>
+  </div>
+  <div class="pm-gate"><b>Day 30 decision:</b> ready for production, extend the test period, or narrow the scope. The decision is recorded with the evidence, not assumed from attendance.</div>
+ </div>
+
+ <div class="card mt" id="ev-rights">
+  <h3>Decision rights</h3>
+  <p class="sub">Proposed P/V/A/C for the work that carries the most risk. Confirm the final rights with the SAVP during onboarding.</p>
+  <div class="ev-legend"><span><b>P</b> Prepares</span><span><b>V</b> Verifies</span><span><b>A</b> Approves</span><span><b>C</b> Consulted</span><span><b>I</b> Informed</span></div>
+  <div class="scroll"><table class="tbl">
+   <thead><tr><th>Work</th><th>Director</th><th>Gifts &amp; Data</th><th>Finance</th><th>IT / HUIT</th><th>SAVP</th></tr></thead>
+   <tbody>
+    <tr><td>Gift acceptance and coding</td><td>A</td><td>P</td><td>C</td><td>I</td><td>I</td></tr>
+    <tr><td>Batch release</td><td>A</td><td>P/V</td><td>V</td><td>I</td><td>I</td></tr>
+    <tr><td>Complex gift or write-off</td><td>P</td><td>C</td><td>C</td><td>I</td><td>A</td></tr>
+    <tr><td>Monthly reconciliation</td><td>A</td><td>P</td><td>V</td><td>C</td><td>I</td></tr>
+    <tr><td>CRM release or change</td><td>A</td><td>C</td><td>I</td><td>P</td><td>I</td></tr>
+    <tr><td>Access change</td><td>A</td><td>I</td><td>I</td><td>P</td><td>I</td></tr>
+    <tr><td>External report release</td><td>A</td><td>P</td><td>V</td><td>I</td><td>C</td></tr>
+    <tr><td>Vendor escalation</td><td>A</td><td>I</td><td>I</td><td>C</td><td>I</td></tr>
+   </tbody>
+  </table></div>
+  <p class="note"><b>Cross-check:</b> the posting assigns the Director ownership of the CRM, gift accounting and reporting, while Finance owns accounting and IT owns systems. This table keeps those boundaries visible.</p>
  </div>
 </section>
 <!-- ================= AI & ANALYTICS LAB ================= -->
@@ -2108,7 +2199,8 @@ const SUBS = {
  reports:[['Goal progress and forecast',['progress']],['Weekly report and catalog',['weekly','catalog']],['Lapsed donor renewal',['lybunt']],['Portfolio health',['portfolio']]],
  lab:[['Donor behavior',['flow','behav']],['Cohorts and segments',['cohort','conc','rfm','kmeans']],['Timing and geography',['calendar','tilemap']],['Forecast models',['fcast','mape','season']],['Renewal models',['roc','calib','thresh']],['AI for data quality',['anom','nb']],['Model governance',['models']]],
  team:[['Coverage',['coverage']],['Communication rhythm',['rhythm']],['Workload and partners',['workload','partners']],['Training and task forces',['training','taskforce']],['First 90 days',['ninety']]],
- projects:[['Portfolio',['pm-portfolio']],['Prioritization',['pm-prioritize']],['Workday charter',['pm-charter']],['RAID and gates',['pm-raid','pm-gates']],['Benefits',['pm-benefits']]]
+ projects:[['Portfolio',['pm-portfolio']],['Prioritization',['pm-prioritize']],['Workday charter',['pm-charter']],['RAID and gates',['pm-raid','pm-gates']],['Benefits',['pm-benefits']]],
+ evidence:[['Duty coverage',['ev-coverage']],['Sample reports',['ev-reports']],['Day 30 readiness',['ev-ready']],['Decision rights',['ev-rights']]]
 };
 Object.entries(SUBS).forEach(([pid, subs]) => {
  const panel = document.getElementById(pid); if (!panel) return;
@@ -2121,7 +2213,7 @@ Object.entries(SUBS).forEach(([pid, subs]) => {
  });
  const nav = document.createElement('div'); nav.className = 'subnav'; nav.dataset.panel = pid; nav.setAttribute('role', 'tablist'); nav.setAttribute('aria-label', 'Sections in this tab');
  const gnum = GROUPS.findIndex(g => g[0] === pid) + 1;
- nav.innerHTML = `<span class="sublab">${gnum ? gnum + ' · ' + esc(GROUPS[gnum - 1][1]) : ({emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio'}[pid] || 'Overview')}</span>` + subs.map((sb, i) => `<button role="tab" data-sub="${i}" aria-selected="${i === 0}"><b>${gnum ? gnum + '.' + (i + 1) : i + 1}</b>${esc(sb[0])}</button>`).join('');
+ nav.innerHTML = `<span class="sublab">${gnum ? gnum + ' · ' + esc(GROUPS[gnum - 1][1]) : ({emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview')}</span>` + subs.map((sb, i) => `<button role="tab" data-sub="${i}" aria-selected="${i === 0}"><b>${gnum ? gnum + '.' + (i + 1) : i + 1}</b>${esc(sb[0])}</button>`).join('');
  nav.hidden = pid !== 'overview';
  $('#subbar').appendChild(nav);
  nav.addEventListener('click', e => { const b = e.target.closest('button[data-sub]'); if (b) showSub(pid, +b.dataset.sub, true); });
@@ -2137,7 +2229,7 @@ function showSub(pid, k, user) {
 /* Sub-index dropdown from the top tab line */
 const subindex = $('#subindex');
 let subindexTimer;
-const panelName = pid => (GROUPS.find(g => g[0] === pid) || [pid, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio'}[pid] || 'Overview'])[1];
+const panelName = pid => (GROUPS.find(g => g[0] === pid) || [pid, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[pid] || 'Overview'])[1];
 function closeSubindex() {
  if (!subindex) return;
  clearTimeout(subindexTimer);
@@ -2184,12 +2276,12 @@ function openEvidence(t) {
  ids.forEach(id => { const el = document.getElementById(id); if (!el) return; const box = el.closest('.card') || el; if (!seen.has(box)) { seen.add(box); blocks.push(box); } });
  const html = blocks.map(b => { const c = b.cloneNode(true); c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(e => e.removeAttribute('id')); c.querySelectorAll('marker').forEach(e => e.setAttribute('id', 'ah')); c.hidden = false; c.classList.remove('mt'); return c.outerHTML; }).join('');
  const title = t.dataset.title || (blocks[0] && blocks[0].querySelector('h3') ? blocks[0].querySelector('h3').textContent : '');
- const grp = (GROUPS.find(g => g[0] === tab) || [tab, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio'}[tab] || 'Overview'])[1];
+ const grp = (GROUPS.find(g => g[0] === tab) || [tab, {emerson:'Emerson 2030', lab:'AI & analytics lab', projects:'Project portfolio', evidence:'Evidence'}[tab] || 'Overview'])[1];
  const subIdx = (SUBS[tab] || []).findIndex(sb => sb[1].some(i => ids.includes(i)));
  dlg.classList.add('wide');
  openDlg(`<p class="eyebrow">${esc(grp)} · evidence</p><h3 id="dlg-title">${esc(title)}</h3><div class="evidence">${html}</div><p style="margin-top:14px"><button class="linkbtn" data-go="${tab}" data-sub="${subIdx < 0 ? 0 : subIdx}">Open this in the ${esc(grp)} tab</button></p>`, t);
 }
-$('#index-btn').addEventListener('click', e => { e.stopPropagation(); const blocks = [['overview','Overview'],['emerson','Emerson 2030']].concat(GROUPS).concat([['projects','Project portfolio'],['lab','AI & analytics lab']]).map(([pid, name]) => { const gi = GROUPS.findIndex(g => g[0] === pid) + 1; return `<div class="ixg"><button class="ixh" data-go="${pid}" data-sub="0">${gi ? '<b>' + gi + '</b>' : ''}${esc(name)}</button><ol>${SUBS[pid].map((sb, k) => `<li><button data-go="${pid}" data-sub="${k}"><span>${gi ? gi + '.' + (k + 1) : k + 1}</span>${esc(sb[0])}</button></li>`).join('')}</ol></div>`; }).join(''); dlg.classList.add('wide'); openDlg(`<p class="eyebrow">Index</p><h3 id="dlg-title">Every tab and section</h3><div class="ixgrid">${blocks}</div>`, e.currentTarget); });
+$('#index-btn').addEventListener('click', e => { e.stopPropagation(); const blocks = [['overview','Overview'],['emerson','Emerson 2030']].concat(GROUPS).concat([['projects','Project portfolio'],['evidence','Evidence'],['lab','AI & analytics lab']]).map(([pid, name]) => { const gi = GROUPS.findIndex(g => g[0] === pid) + 1; return `<div class="ixg"><button class="ixh" data-go="${pid}" data-sub="0">${gi ? '<b>' + gi + '</b>' : ''}${esc(name)}</button><ol>${SUBS[pid].map((sb, k) => `<li><button data-go="${pid}" data-sub="${k}"><span>${gi ? gi + '.' + (k + 1) : k + 1}</span>${esc(sb[0])}</button></li>`).join('')}</ol></div>`; }).join(''); dlg.classList.add('wide'); openDlg(`<p class="eyebrow">Index</p><h3 id="dlg-title">Every tab and section</h3><div class="ixgrid">${blocks}</div>`, e.currentTarget); });
 
 /* ================= TABS ================= */
 const tabs = $$('.tab');
