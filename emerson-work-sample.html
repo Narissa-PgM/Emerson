@@ -621,8 +621,47 @@ dialog.vr-dlg[open]{display:flex;flex-direction:column}
 .ty-tabs{display:flex;gap:6px;margin:14px 0 10px}.ty-tabs button{border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:6px 12px;font-size:13.5px}.ty-tabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
 @media(max-width:700px){.ty{grid-template-columns:1fr}.ty-facts{grid-template-columns:1fr}}
 @media(max-width:760px){.vr-pick{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:88vw}.vr-pick button,.vr-pick .g{flex-shrink:0}.vr-top{gap:6px}}
+.tbl tr.best th,.tbl tr.best td{background:var(--pale)}
+</style><style id="nf-css">html,body{scroll-behavior:auto!important}
+main{transition:opacity .16s ease}
+html.nf-out main{opacity:0}
+@media(prefers-reduced-motion:reduce){main{transition:none}}
 </style></head>
-<body>
+<body><script id="nf-js">/* Section changes: quick fade-out, jump, fade-in. Never an animated scroll. */
+(function(){
+'use strict';
+var D=document,H=D.documentElement;
+if(window.__navfade)return;window.__navfade=1;
+var inst=function(o){return o&&typeof o==='object'?Object.assign({},o,{behavior:'instant'}):o};
+var ws=window.scrollTo.bind(window),wb=window.scrollBy.bind(window);
+window.scrollTo=function(a,b){return typeof a==='object'?ws(inst(a)):ws(a,b)};window.scroll=window.scrollTo;
+window.scrollBy=function(a,b){return typeof a==='object'?wb(inst(a)):wb(a,b)};
+var siv=Element.prototype.scrollIntoView;Element.prototype.scrollIntoView=function(a){return siv.call(this,typeof a==='object'?inst(a):a)};
+['scrollTo','scroll','scrollBy'].forEach(function(k){var f=Element.prototype[k];if(f)Element.prototype[k]=function(a,b){return typeof a==='object'?f.call(this,inst(a)):f.call(this,a,b)}});
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var main=function(){return D.querySelector('main')};
+function isNav(t){
+ if(t.matches('a.skip,[aria-haspopup="dialog"],[data-info],[data-def],[download],[target]'))return false;
+ if(t.tagName==='A'){var h=t.getAttribute('href')||'';if(h.charAt(0)!=='#'||h.length<2)return false;var g=D.getElementById(decodeURIComponent(h.slice(1)));return !!g&&!g.closest('dialog')}
+ if(t.closest('dialog'))return t.matches('[data-go]:not([data-go*="#"])');
+ if(t.matches('[data-go]'))return t.getAttribute('data-go').indexOf('#')<0;
+ if(t.matches('[data-open^="go:"]'))return true;
+ var m=main();if(m&&m.contains(t))return false;
+ if(t.getAttribute('aria-selected')==='true')return false;
+ return t.matches('[role=tab],.tab,[aria-controls],button[class*="nav"],[class*="nav"] button,button[id*="Nav"]');
+}
+var busy=false;
+window.addEventListener('click',function(e){
+ if(e.__nf||busy||e.defaultPrevented||e.button>0||e.metaKey||e.ctrlKey||e.shiftKey)return;
+ var t=e.target.closest&&e.target.closest('a,button,[role=tab],[data-go],[data-open]');if(!t||!isNav(t))return;
+ var m=main();if(!m||reduce)return;
+ e.preventDefault();e.stopImmediatePropagation();busy=true;H.classList.add('nf-out');
+ setTimeout(function(){var ev=new MouseEvent('click',{bubbles:true,cancelable:true,view:window});ev.__nf=1;t.dispatchEvent(ev);
+  requestAnimationFrame(function(){requestAnimationFrame(function(){H.classList.remove('nf-out');busy=false})})},150);
+ setTimeout(function(){H.classList.remove('nf-out');busy=false},900);
+},true);
+})();
+</script>
 <header class="head"><div class="wrap">
  <div>
   <p class="eyebrow">Work sample · Director, Advancement Services, Emerson College</p>
@@ -965,6 +1004,16 @@ dialog.vr-dlg[open]{display:flex;flex-direction:column}
    <p class="sub">What each partner can count on, and how fast.</p>
    <div id="partners"></div>
   </div>
+ </div>
+ <div class="card mt">
+  <h3>Advancement Services budget, FY27</h3>
+  <p class="sub">Budget against spending to date and the full-year forecast, the lines that moved, and the unit cost of processing a gift.</p>
+  <div id="budget"></div>
+ </div>
+ <div class="card mt">
+  <h3>Year-end staffing: three options, costed</h3>
+  <p class="sub">The same forecast that drives the surge chart, run through a weekly backlog model. What each option costs, and what it does to receipt times.</p>
+  <div id="yestaff"></div>
  </div>
  <div class="g12 mt">
   <div class="card">
@@ -1929,7 +1978,7 @@ const SUBS = {
  quality:[['Record health and errors',['health','pareto']],['Duplicates',['dupes']],['Training and access',['errtrend','access']],['Confidentiality and policies',['policies']],['Partner data requests',['dreq']]],
  reports:[['Reporting rhythm',['rrhythm']],['Goal progress and forecast',['progress']],['Weekly report and catalog',['weekly','catalog']],['Lapsed donor renewal',['lybunt']],['Portfolio health',['portfolio']]],
  lab:[['Donor behavior',['flow','behav']],['Cohorts and segments',['cohort','conc','rfm','kmeans']],['Timing and geography',['calendar','tilemap']],['Forecast models',['fcast','mape','season']],['Renewal models',['roc','calib','thresh']],['AI for data quality',['anom','nb']],['Model governance',['models']]],
- team:[['Coverage',['coverage']],['Communication rhythm',['rhythm']],['Workload and partners',['workload','partners']],['Training and task forces',['training','taskforce']],['First 90 days',['ninety']]]
+ team:[['Coverage',['coverage']],['Communication rhythm',['rhythm']],['Workload and partners',['workload','partners']],['Budget and year-end staffing',['budget','yestaff']],['Training and task forces',['training','taskforce']],['First 90 days',['ninety']]]
 };
 Object.entries(SUBS).forEach(([pid, subs]) => {
  const panel = document.getElementById(pid); if (!panel) return;
@@ -2189,6 +2238,54 @@ if (ty) {
  ty.querySelector('.ty-btn').addEventListener('click', e => { tyOp = e.currentTarget; sd.showModal(); });
 }
 window.__VR = {openRep, keys: ORDER.flatMap(o => o[1])};
+})();
+
+(() => {
+'use strict';
+const host=document.getElementById('budget'),ys=document.getElementById('yestaff');if(!host)return;
+const C={pur:'#5b2a86',slate:'#4a6675',gold:'#a5762a',green:'#2f6f4f',amber:'#9a5b0a',red:'#b42318',ink:'#1f2a30'};
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const T=(x,y,s,a='')=>`<text x="${(+x).toFixed(1)}" y="${(+y).toFixed(1)}" ${a}>${s}</text>`;
+const SV=(w,h,g,l)=>`<svg class="vr-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${E(l)}">${g}</svg>`;
+const n0=v=>Math.round(v).toLocaleString('en-US'),usd=v=>(v<0?'−':'')+'$'+n0(Math.abs(v)),p0=v=>Math.round(v*100)+'%',p1=v=>(v*100).toFixed(1)+'%',sum=a=>a.reduce((x,y)=>x+y,0);
+const SIM=(window.__EM||{}).SIM||{p50:25.8e6};
+/* FY27 budget: synthetic, sized to a Director and three Gifts & Data Coordinators */
+const BUD=[['Salaries and benefits, 4 staff',369000,123000,369000,''],['Raiser’s Edge and Blackbaud licenses',84000,84000,88200,'Renewal uplift of 5% at the July renewal'],['Connected platforms, Advancement share',38000,13200,38000,'GiveCampus, Almabase, PeopleGrove, Emma'],['Data services',14000,4100,16500,'Email append added before the year-end appeal'],['Receipts, printing and postage',32000,8700,36500,'December receipt volume, 14,800 gifts forecast'],['Temporary help, year-end',18000,0,11200,'Two temporary staff, 5 weeks, checks only'],['Training and conferences',9000,2600,9000,'CASE and bbcon']];
+const B0=sum(BUD.map(b=>b[1])),BF=sum(BUD.map(b=>b[3])),EL=4/12;
+const VOL=[4900,4100,5300,6600,7900,14800,6400,4600,7400,5000,6200,6900],GIFTS=sum(VOL);
+const kp=a=>`<div class="facts4">${a.map(k=>`<div><b>${k[0]}</b><span>${k[1]}</span></div>`).join('')}</div>`;
+function bridge(){const steps=[['FY27 budget',B0,'b']].concat(BUD.filter(b=>b[3]!==b[1]).map(b=>[b[0].split(/[,:]/)[0].replace('Raiser’s Edge and Blackbaud licenses','Blackbaud licenses'),b[3]-b[1]])).concat([['Forecast',BF,'b']]);
+ const w=600,h=220,L=60,B=46,Tt=18,n=steps.length,bw=(w-L-6)/n,lo=555000,hi=575000,Y=v=>Tt+(1-(v-lo)/(hi-lo))*(h-Tt-B);let g='',run=0;
+ [555000,560000,565000,570000,575000].forEach(v=>g+=`<line x1="${L}" x2="${w-4}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e6e8e5"/>`+T(L-6,Y(v)+4,'$'+v/1000+'K','text-anchor="end" class="ax"'));
+ steps.forEach((s,i)=>{const x=L+i*bw+7,ww=bw-14;let y0,y1,col,lab;if(s[2]==='b'){y0=Y(s[1]);y1=Y(lo);col=C.slate;lab='$'+(s[1]/1000).toFixed(1)+'K';run=s[1]}else{const a=run,b=run+s[1];y0=Y(Math.max(a,b));y1=Y(Math.min(a,b));col=s[1]>0?C.red:C.green;lab=(s[1]>0?'+':'−')+usd(Math.abs(s[1]));run=b}
+  g+=`<rect x="${x}" y="${y0}" width="${ww}" height="${Math.max(2,y1-y0)}" rx="2" fill="${col}"/>`+T(x+ww/2,y0-5,lab,'text-anchor="middle" class="vl"');const ln=[];s[0].split(' ').forEach(wd=>{if(ln.length&&(ln[ln.length-1]+' '+wd).length<=12)ln[ln.length-1]+=' '+wd;else ln.push(wd)});ln.slice(0,2).forEach((t,k)=>g+=T(x+ww/2,h-B+15+k*12,E(t),'text-anchor="middle" class="ax"'))});
+ return SV(w,h,g,'FY27 Advancement Services budget to forecast bridge')}
+function pacing(){const w=600,rh=26,L=250,h=BUD.length*rh+24,X=p=>L+p/1.15*(w-L-66);let g=`<line x1="${X(EL)}" x2="${X(EL)}" y1="4" y2="${h-16}" stroke="${C.ink}" stroke-dasharray="4 3"/>`+T(X(EL),h-3,'33% of the year elapsed','text-anchor="middle" class="ax"');
+ BUD.forEach((b,i)=>{const y=6+i*rh,sp=b[2]/b[1],fo=b[3]/b[1],col=fo>1.005?C.red:fo<.995?C.green:C.slate;g+=T(L-8,y+13,E(b[0].length>36?b[0].slice(0,34)+'…':b[0]),'text-anchor="end" class="lb"')+`<rect x="${X(0)}" y="${y+4}" width="${X(1)-X(0)}" height="12" rx="2" fill="#eef0ee"/><rect x="${X(0)}" y="${y+4}" width="${Math.max(1,X(Math.min(sp,1.15))-X(0))}" height="12" rx="2" fill="${C.slate}" fill-opacity=".75"><title>${E(b[0])}: ${usd(b[2])} of ${usd(b[1])}</title></rect><circle cx="${X(Math.min(fo,1.15))}" cy="${y+10}" r="5" fill="${col}" stroke="#fff" stroke-width="1.5"><title>Forecast ${usd(b[3])}, ${p0(fo)} of budget. ${E(b[4])}</title></circle>`+T(w-60,y+14,p0(sp)+' spent','class="ax"')});
+ return SV(w,h,g,'Spending to date and full-year forecast by budget line')+`<p class="vr-leg"><span><i style="background:${C.slate};opacity:.75"></i>Spent to date</span><span><i style="background:${C.red};border-radius:50%"></i>Forecast over budget</span><span><i style="background:${C.green};border-radius:50%"></i>Under</span><span><i style="background:${C.slate};border-radius:50%"></i>On budget</span></p>`}
+const UNIT=[['FY24',509000,71200,21.9e6],['FY25',531000,74800,23.0e6],['FY26',548000,77900,24.6e6],['FY27 forecast',BF,GIFTS,SIM.p50]];
+host.innerHTML=kp([[usd(B0),'FY27 operating budget, Advancement Services'],[usd(BF),`Full-year forecast, ${BF>B0?'+':'−'}${p1(Math.abs(BF/B0-1))}`],['$'+(BF/GIFTS).toFixed(2),'Cost per gift processed, '+n0(GIFTS)+' gifts'],['$'+(BF/SIM.p50).toFixed(3),'Advancement Services cost per $1 received']])+
+`<div class="g2 mt"><div><h4 class="h4">From budget to forecast</h4>${bridge()}<p class="note">Through the October close. The axis starts at $555K so each change is visible.</p></div><div><h4 class="h4">Pacing by line</h4>${pacing()}</div></div>
+<div class="g2 mt"><div><h4 class="h4">Unit cost, four years</h4><table class="tbl"><thead><tr><th scope="col">Year</th><th scope="col">Cost</th><th scope="col">Gifts</th><th scope="col">Per gift</th><th scope="col">Per $1 received</th></tr></thead><tbody>${UNIT.map(u=>`<tr><th scope="row">${u[0]}</th><td>${usd(u[1])}</td><td>${n0(u[2])}</td><td>$${(u[1]/u[2]).toFixed(2)}</td><td>$${(u[1]/u[3]).toFixed(3)}</td></tr>`).join('')}</tbody></table><p class="note">Cost per gift has held near $7 for four years while gift volume grew 12%. The GiveCampus import absorbed the growth without new staff.</p></div>
+<div><h4 class="h4">Covering the forecast overrun</h4><ul class="cat"><li><strong>Already in the forecast: temporary-help underspend</strong><span>−$6,800</span><small>The year-end plan needs 5 weeks of help, not the 8 budgeted.</small></li><li><strong>Remaining overrun, a decision for the Senior AVP</strong><span>${usd(BF-B0)}, ${p1(BF/B0-1)}</span><small>Postage and the email append, both driven by the year-end appeal. Recommend absorbing it in the Institutional Advancement total.</small></li><li><strong>Next year: ask Blackbaud to cap the renewal uplift at 3%</strong><span>−$1,680 in FY28</span><small>Raised at the spring account review, before the July renewal.</small></li></ul></div></div>
+<p class="note">Synthetic figures for this sample, sized to a Director and three coordinators. Budget lines and amounts are assumptions to confirm with Finance.</p>`;
+/* year-end staffing: three options run through a weekly backlog model */
+const WK=[['11/27',760],['12/4',1150],['12/11',880],['12/18',1240],['12/25',1520],['1/1',2350],['1/8',1300],['1/15',760],['1/22',520],['1/29',480]],CAP=900;
+const OPT=[{k:'A',n:'Temporary help for checks',add:w=>/^(12\/18|12\/25|1\/1|1\/8|1\/15)$/.test(w)?700:0,cost:2*5*35*32,c:C.green,note:'Two temporary staff, 35 hours a week from December 14 to January 15. They enter checks; coordinators verify.'},
+ {k:'B',n:'Overtime only',add:w=>/^(12\/4|12\/11|12\/18|12\/25|1\/1|1\/8|1\/15)$/.test(w)?300:0,cost:3*8*7*45,c:C.gold,note:'Each coordinator works 8 extra hours a week for seven weeks, at time and a half.'},
+ {k:'C',n:'No extra help',add:()=>0,cost:0,c:C.red,note:'Standard staffing. The backlog clears only after January.'}];
+const run=o=>{let b=0;return WK.map(([w,v])=>{const cap=CAP+o.add(w);b=Math.max(0,b+v-cap);return {w,b,days:2+b/(cap/5)}})};
+OPT.forEach(o=>{o.r=run(o);o.peak=Math.max(...o.r.map(x=>x.b));o.worst=Math.max(...o.r.map(x=>x.days));o.after=o.r.find(x=>x.w==='1/15').b});
+function chart(){const w=600,h=230,L=52,B=28,Tt=14,n=WK.length,X=i=>L+i/(n-1)*(w-L-120),mx=Math.ceil(Math.max(...OPT.map(o=>o.peak))/500)*500||500,Y=v=>Tt+(1-v/mx)*(h-Tt-B);let g='';
+ for(let v=0;v<=mx;v+=500)g+=`<line x1="${L}" x2="${w-120}" y1="${Y(v)}" y2="${Y(v)}" stroke="#e6e8e5"/>`+T(L-6,Y(v)+4,n0(v),'text-anchor="end" class="ax"');
+ WK.forEach((k,i)=>g+=T(X(i),h-8,k[0],'text-anchor="middle" class="ax"'));
+ OPT.forEach(o=>{g+=`<path d="M${o.r.map((x,i)=>X(i).toFixed(1)+' '+Y(x.b).toFixed(1)).join(' L')}" fill="none" stroke="${o.c}" stroke-width="2.6"/>`+o.r.map((x,i)=>`<circle cx="${X(i)}" cy="${Y(x.b)}" r="3" fill="${o.c}"><title>Option ${o.k}, week ending ${x.w}: ${n0(x.b)} gifts waiting, receipt about ${x.days.toFixed(1)} business days</title></circle>`).join('')});
+ const lab=OPT.map(o=>({o,y:Y(o.r[o.r.length-1].b)})).sort((a,b)=>a.y-b.y);let last=-99;lab.forEach(l=>{const y=Math.max(l.y,last+14);last=y;g+=T(w-114,y+4,`<tspan font-weight="700" fill="${l.o.c}">${l.o.k}</tspan> <tspan class="ax">${{A:'Temporary help',B:'Overtime',C:'No extra help'}[l.o.k]}</tspan>`)});
+ return SV(w,h,g,'Gifts waiting to be entered at the end of each week under three staffing options')}
+if(ys){ys.innerHTML=`<div class="g12"><div>${chart()}<p class="note">Weekly model: gifts waiting = last week’s backlog + gifts received − what the team can enter that week. Receipt time is about 2 business days plus the backlog divided by a day’s capacity. Weekly volumes are the year-end forecast on the Overview tab.</p></div>
+<div><ul class="cat">${OPT.map(o=>`<li><strong><span style="color:${o.c}">${o.k}</span> · ${E(o.n)}</strong><span>${usd(o.cost)} · peak ${n0(o.peak)} waiting · worst ${o.worst.toFixed(1)} days · ${n0(o.after)} waiting on 1/15</span><small>${E(o.note)}</small></li>`).join('')}</ul></div></div>
+<p class="note"><b>Recommendation: option A.</b> For ${usd(OPT[0].cost)}, about ${usd(OPT[0].cost-OPT[1].cost)} more than overtime, the worst week stays near ${OPT[0].worst.toFixed(1)} business days to receipt, close to last December’s 4.1, and the backlog is clear by January 15, before donors file taxes. Overtime alone reaches ${OPT[1].worst.toFixed(1)} days and leaves ${n0(OPT[1].after)} gifts waiting on January 15. Option A is already in the budget forecast above.</p>`}
+window.__EB={B0,BF,GIFTS,OPT:OPT.map(o=>({k:o.k,cost:o.cost,peak:o.peak,worst:o.worst,after:o.after}))};
 })();
 </script></body>
 </html>
